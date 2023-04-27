@@ -11,11 +11,15 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'sheerun/vim-polyglot'
 
 " status bar
-Plug 'itchyny/lightline.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " theme
-Plug 'dylanaraps/wal.vim'
 Plug 'yggdroot/indentline'
+Plug 'nordtheme/vim'
+
+" start screen
+Plug 'mhinz/vim-startify'
 
 " tree
 Plug 'scrooloose/nerdtree'
@@ -24,6 +28,12 @@ Plug 'scrooloose/nerdtree'
 Plug 'raimondi/delimitmate'
 Plug 'roxma/vim-paste-easy'
 Plug 'alvan/vim-closetag'
+
+" icons
+Plug 'ryanoasis/vim-devicons'
+
+" Comenter
+Plug 'scrooloose/nerdcommenter'
 
 " autocomplete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -117,17 +127,20 @@ set listchars=tab:▸\ ,eol:¬
 map <leader>l :set list!<CR> " Toggle tabs and EOL
 
 " Color scheme (terminal)
-colorscheme wal
+colorscheme nord
 
 " Complete using enter
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 
 " Explorer 
-nnoremap <leader>e <Cmd>CocCommand explorer<CR>
+nnoremap <leader>e :NERDTreeToggle<CR>
 
 " Identent lines char list
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 
-" Prettier
-command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
-nnoremap <leader>f <Cmd>CocCommand Prettier<CR>
+" startify
+ let g:startify_custom_header =
+       \ startify#pad(split(system('figlet -w 100 VIM2020'), '\n'))
+
+ " airline
+ let g:airline_theme='nord'
